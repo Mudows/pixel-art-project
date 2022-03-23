@@ -1,3 +1,19 @@
+///////////////////////////////////////////// ALEATORIZA A PALETA DE CORES
+
+function randomPalette() {
+  const getPalette = document.getElementsByClassName('color');
+  getPalette[0].style.backgroundColor = 'black';
+  for (let i = 1; i < getPalette.length; i += 1) {
+    let randomR = Math.floor(Math.random() * 255);
+    let randomG = Math.floor(Math.random() * 255);
+    let randomB = Math.floor(Math.random() * 255);
+    getPalette[i].style.backgroundColor =
+      'rgb(' + randomR + ',' + randomG + ',' + randomB + ')';
+  }
+}
+
+randomPalette();
+
 ///////////////////////////////////////////// SELECIONA A COR A SER USADA
 
 const colorPicker = document.getElementsByClassName('color');
@@ -17,9 +33,19 @@ function selectColor(event) {
 ///////////////////////////////////////////// GERA O GRID DE PIXELS
 
 const pixelBoard = document.getElementById('pixel-board');
-let boardSize = 25;
-document.getElementById('pixel-board').style.backgroundColor = 'white';
+
 function createBoard() {
+  let gridInputValue = document.getElementById('board-size').value;
+  if (gridInputValue > 50) {
+    gridInputValue = 50;
+  }
+  if (gridInputValue < 5) {
+    gridInputValue = 5;
+  }
+  let boardSize = gridInputValue * gridInputValue;
+  pixelBoard.style.width = 42 * gridInputValue + 'px';
+  pixelBoard.style.height = 42 * gridInputValue + 'px';
+
   for (let i = 0; i < boardSize; i += 1) {
     const pixel = document.createElement('div');
     pixel.setAttribute('id', 'pixel' + i);
@@ -30,7 +56,8 @@ function createBoard() {
   }
 }
 
-createBoard();
+window.onload = createBoard();
+document.getElementById('board-size').value = null;
 
 ///////////////////////////////////////////// COLORIR O GRID
 
@@ -50,3 +77,32 @@ function clearBoard() {
     pixelsToReset[i].style.backgroundColor = 'white';
   }
 }
+
+///////////////////////////////////////////// GERAR UM GRID NOVO
+
+document.getElementById('generate-board').addEventListener('click', regenBoard);
+
+function regenBoard() {
+  const pixelQtd = document.getElementsByClassName('pixel');
+  let gridInputValue = document.getElementById('board-size').value;
+
+  if (gridInputValue === '') {
+    alert('Board inválido!');
+    return;
+  }
+  while (pixelQtd.length > 0) {
+    pixelBoard.removeChild(pixelBoard.firstChild);
+  }
+  createBoard();
+}
+
+///////////////////////////////////////////// ATUALIZA O VALOR DO GRID
+
+// document
+//   .getElementById('board-size')
+//   .addEventListener('mousemove', labelUpdate);
+
+// function labelUpdate() {
+//   document.getElementById('size-label').innerText =
+//     document.getElementById('board-size').value;
+// }

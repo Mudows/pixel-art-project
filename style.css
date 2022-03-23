@@ -1,5 +1,5 @@
 .main-container {
-  width: 100vw;
+  /* width: 100vw; */
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -10,7 +10,7 @@ h1 {
   text-align: center;
 }
 
-#color-palette {
+#color-palette, nav {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -23,22 +23,6 @@ h1 {
   margin-right: 10px;
   margin-left: 10px;
   border: 1px solid black;
-}
-
-.c-one {
-  background-color: black;
-}
-
-.c-two {
-  background-color: red;
-}
-
-.c-three {
-  background-color: green;
-}
-
-.c-four {
-  background-color: blue;
 }
 
 #pixel-board {
